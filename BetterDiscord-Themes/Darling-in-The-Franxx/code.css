@@ -988,7 +988,7 @@ css-editor #bd-customcss-attach-controls button {
 
 /* Mentioned Box on chat */
 .theme-dark .isMentioned-N-h9aa {
-    background: rgba(26, 62, 250, 0.1);
+   // background: rgba(26, 62, 250, 0.1);
 }
 .isMentionedCozy-3isp7y:after {
     background: transparent;
