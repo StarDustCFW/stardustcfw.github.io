@@ -159,10 +159,6 @@
 						}
 
 						addplaybutton();
-						dp.on('error', function() {
-							alert("Parece q ocurrio un error");
-							request(0);
-						});
 						dp.on('play', function() {
 							document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
 						});
@@ -212,6 +208,11 @@
             }
 
             init();
+			window.onerror = function() {
+							alert("Parece q ocurrio un error");
+							request(0);
+						};
+
         });
 		onbeforeunload = function(e){
 			//alert("cerrando");
