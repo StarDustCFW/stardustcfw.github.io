@@ -154,7 +154,7 @@
 							document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon cplay";
 							document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 17 32"><path d="M14.080 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048zM2.88 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048z"></path></svg>';
 						});
-						
+						/*
 						setTimeout(function(){
 							var result = confirm("Reproducirlo");
 							if (result == true) {
@@ -162,6 +162,7 @@
 								dp.play();
 							}
 						},500);
+						*/
 						//dp.toggle();
                     } else {
                         $("#message").text('Ha ocurrido un error: ' + data.error);
@@ -192,5 +193,9 @@
             init();
         });
     </script>
+	<video controls autoplay>
+  <source src="play.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
 </body>
 </html>
