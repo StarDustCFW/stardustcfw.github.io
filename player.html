@@ -172,6 +172,8 @@
 
                     if (data.status == 401) {
                         window.location.href = 'error.html';
+						$("#message").text('Ha ocurrido un error: 401');
+						return ;
                     }
                     
                     if (typeof data.sleep != "undefined") {
@@ -219,7 +221,7 @@
 			localStorage.videotime = Math.floor(dp.video.currentTime);
 			console.log(localStorage.videotime);
 			request(0);
-			dp.play()
+			dp.play();
 
 		}
 
