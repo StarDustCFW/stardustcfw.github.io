@@ -139,13 +139,13 @@
 
 			addplaybutton();
 			dp.on('play', function() {
-				document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
-			});
-			dp.on('playing', function() {
 				if(LS.videotime > 0){
 					dp.seek(LS.videotime);
 					LS.videotime = 0;
 				}
+			document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
+			});
+			dp.on('playing', function() {
 
 				document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
 			});
