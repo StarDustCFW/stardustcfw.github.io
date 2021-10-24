@@ -160,7 +160,12 @@
 					LS[vidid] = ti;
 					Marker.innerHTML="Resume: "+Math.floor(ti/60)+":00";
 				} else {
-					Marker.innerHTML="Resume: 00:"+Math.floor(LS[vidid]/60);
+					if (LS[vidid] > 0){
+						Marker.innerHTML="Resume: 00:"+Math.floor(LS[vidid]/60);
+					} else if(ti>0){
+						Marker.innerHTML="Resume: 00:"+Math.floor(ti/60);
+					}
+					
 				}
 			}, 3000);
 			/*
