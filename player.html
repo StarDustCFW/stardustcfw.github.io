@@ -115,7 +115,7 @@
             $("#hlsload").remove();
 			dp = new DPlayer({
 				container: document.getElementById('mse'),
-				preload: 'none', // metadata auto none
+				preload: 'auto', // metadata auto none
 				screenshot: false,
 				airplay: false,
 				theme: '#FADFA3',
@@ -124,7 +124,8 @@
 
 				video: {
 					url: urlv,//'play.mp4',//data.file,
-					type: 'video/mp4'
+					type: 'video/mp4',
+					thumbnails: 'Icon.jpg'
 				},
 				highlight: [{text: 'intro',time: 90,}, {text: 'Medio',time: 900,}]
 			});
