@@ -106,7 +106,8 @@
 		var resizer;
 		var dp;
 		var videourl;
-		localStorage.videotime;
+		var LS = localStorage;
+		var SS = sessionStorage;
 		function setPlayer(urlv){
             $("#hlsload").remove();
 			dp = new DPlayer({
@@ -148,9 +149,9 @@
 					//document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon cplay";
 				//document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 17 32"><path d="M14.080 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048zM2.88 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048z"></path></svg>';
 			});
-				console.log(localStorage.videotime);
-				if(localStorage.videotime > 0){
-					dp.seek(localStorage.videotime);
+				console.log(LS.videotime);
+				if(LS.videotime > 0){
+					dp.seek(LS.videotime);
 					dp.play();
 				}
 
@@ -218,9 +219,14 @@
             init();
         }
 		function reload(){
-			localStorage.videotime = Math.floor(dp.video.currentTime);
-			console.log(localStorage.videotime);
+			var ti = Math.floor(dp.video.currentTime);
+			if(ti!=0){
+				LS.videotime = ti;
+			}
+			
+			console.log(LS.videotime);
 			request(0);
+			window.location.reload();
 			
 
 		}
