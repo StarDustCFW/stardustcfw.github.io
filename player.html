@@ -91,9 +91,8 @@
 	*/
     </script>
 	<div style="position: absolute; z-index:99999999999;">
-		<button onclick="setTimeout(function(){dp.play();},1000);">Play</button>
+		<button id="Marker" onclick="dp.play();">Play</button>
 		<button onclick="reload();">Recargar</button>
-		<button id="Marker" onclick="setTimeout(function(){dp.play();dp.seek(LS[vidid]);},1000);dp.seek(LS[vidid]);"></button>
 	</div>
 			
 
@@ -159,10 +158,14 @@
 				var ti = Math.floor(dp.video.currentTime);
 				if(ti>59){
 					LS[vidid] = ti;
-					Marker.innerHTML="Resume: "+Math.floor(ti/60)+":00";
-				} else {
+					var minutes = Math.floor(ti / 60);
+					var seconds = ti - minutes * 60;
+					Marker.innerHTML="Resume: "+minutes+":"+seconds;
+					Marker.onclick=function(){setTimeout(function(){dp.play();},1000);setTimeout(function(){dp.seek(LS[vidid]);},1500); dp.seek(LS[vidid])};
+				} else if (LS[vidid] > 10){
 					var minutes = Math.floor(LS[vidid] / 60);
 					var seconds = LS[vidid] - minutes * 60;
+					Marker.onclick=function(){setTimeout(function(){dp.play();},1000);setTimeout(function(){dp.seek(LS[vidid]);},1500); dp.seek(LS[vidid])};
 					Marker.innerHTML="Resume: "+minutes+":"+seconds;					
 				}
 			}, 1000);
