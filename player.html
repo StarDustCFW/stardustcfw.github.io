@@ -83,21 +83,19 @@
     <script type="text/javascript">
         window.onload = function() {
             document.getElementById('mse').style.height = window.innerHeight + 'px';
-			document.getElementById('mse').style.height = (window.innerHeight-40) + 'px';
         }
-
-        window.addEventListener('resize', function() {
-            
-        });
 	
 	/*
 	
 	*/
     </script>
+	<div style="position: Absolute;z-index:99999999999">
+		<button onclick="reload();">Recargar</button>
+		<button id="Marker" onclick="setTimeout(function(){dp.seek(LS.videotime);},1000);">--</button>
+	</div>
+			
 
 <div id='hlsload'><p><b class="i" id="message">Obteniendo servidores</b></p></div>
-<button style="index-z:9999" onclick="reload();">Recargar</button>
-<button style="index-z:9999" id="Marker" onclick="reload();">--</button>
 <div id="mse"></div>
 
 <script type="text/javascript">
@@ -170,7 +168,7 @@
 				var ti = Math.floor(dp.video.currentTime);
 				if(ti!=0){
 					LS.videotime = ti;
-					Marker.innerHTML=ti;
+					Marker.innerHTML="Resume: "+Math.floor(ti/60);
 				}
 			}, 3000);
 			/*
@@ -237,6 +235,7 @@
             init();
         }
 		function reload(){
+			/*
 			var ti = Math.floor(dp.video.currentTime);
 			if(ti!=0){
 				LS.videotime = ti;
@@ -244,7 +243,8 @@
 			
 			console.log(LS.videotime);
 			request(0);
-			window.location.reload();
+			*/
+			window.location.reload(true);
 			
 
 		}
@@ -259,5 +259,6 @@
 		alert(e);
 	}
     </script>
+
 </body>
 </html>
