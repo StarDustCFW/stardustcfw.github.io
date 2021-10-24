@@ -132,7 +132,7 @@
 							autoplay: true,
 
 							video: {
-								url: data.file,//'play.mp4',//data.file,
+								url: data.file+"----",//'play.mp4',//data.file,
 								type: 'video/mp4'
 							},
 							highlight: [
@@ -160,7 +160,7 @@
 
 						addplaybutton();
 						dp.on('error', function() {
-							alert("Parece q ocirrioun error");
+							alert("Parece q ocurrio un error");
 							request(0);
 						});
 						dp.on('play', function() {
