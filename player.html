@@ -170,7 +170,9 @@
 				var ti = Math.floor(dp.video.currentTime);
 				if(ti>59){
 					LS[vidid] = ti;
-					Marker.innerHTML="Resume: "+Math.floor(ti/60);
+					Marker.innerHTML="Resume: "+Math.floor(ti/60)+":00";
+				} else {
+					Marker.innerHTML="Resume: 00:"+Math.floor(ti/60);
 				}
 			}, 3000);
 			/*
