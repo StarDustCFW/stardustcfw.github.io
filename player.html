@@ -96,7 +96,10 @@
     </script>
 
 <div id='hlsload'><p><b class="i" id="message">Obteniendo servidores</b></p></div>
+<button style="index-z:9999" onclick="reload();">Recargar</button>
+<button style="index-z:9999" id="Marker" onclick="reload();">--</button>
 <div id="mse"></div>
+
 <script type="text/javascript">
 	try{
 		var lastRequest = 0;
@@ -167,8 +170,9 @@
 				var ti = Math.floor(dp.video.currentTime);
 				if(ti!=0){
 					LS.videotime = ti;
+					Marker.innerHTML=ti;
 				}
-			}, 10000);
+			}, 3000);
 			/*
 				var result = confirm("Reproducirlo");
 				if (result == true) {
@@ -255,6 +259,5 @@
 		alert(e);
 	}
     </script>
-	<button style="index-z:9999" onclick="reload();">Recargar token</button>
 </body>
 </html>
