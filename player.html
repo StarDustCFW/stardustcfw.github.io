@@ -78,6 +78,8 @@
 </head>
 <body>
 <!--
+-->
+
     <script type="text/javascript">
         window.onload = function() {
             document.getElementById('mse').style.height = window.innerHeight + 'px';
@@ -121,8 +123,9 @@
                         $("#hlsload").remove();
 						dp = new DPlayer({
 							container: document.getElementById('mse'),
-							preload: 'none', // metadata
-							screenshot: true,
+							preload: 'auto', // metadata
+							screenshot: false,
+							airplay: false,
 							theme: '#f97a29',
 							hotkey: true,
 							autoplay: true,
@@ -195,10 +198,5 @@
             init();
         });
     </script>
--->
-<audio controls autoplay id="playAudio">
-  <source src="play.mp4" type="audio/mp4">
-  Your browser does not support the video tag.
-</audio> 
 </body>
 </html>
