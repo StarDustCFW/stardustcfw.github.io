@@ -83,28 +83,90 @@
     <script type="text/javascript">
         window.onload = function() {
             document.getElementById('mse').style.height = window.innerHeight + 'px';
+			document.getElementById('mse').style.height = (window.innerHeight-20) + 'px';
         }
 
         window.addEventListener('resize', function() {
-            document.getElementById('mse').style.height = window.innerHeight + 'px';
+            
         });
+	
+	/*
+	
+	*/
     </script>
 
 <div id='hlsload'><p><b class="i" id="message">Obteniendo servidores</b></p></div>
 <div id="mse"></div>
 <script type="text/javascript">
 	try{
-        $(document).ready(function () {
-            var lastRequest = 0;
-            var startTime = 0;
-            var dataHash;
-            var limitRequest = 3;
-            var resizer;
-            var dp;
+		var lastRequest = 0;
+		var startTime = 0;
+		var dataHash;
+		var limitRequest = 3;
+		var resizer;
+		var dp;
+		var videourl;
+		localStorage.videotime;
+		function setPlayer(urlv){
+            $("#hlsload").remove();
+			dp = new DPlayer({
+				container: document.getElementById('mse'),
+				preload: 'none', // metadata auto none
+				screenshot: false,
+				airplay: false,
+				theme: '#FADFA3',
+				hotkey: true,
+				//autoplay: true,
 
-            function request(num) {
-                lastRequest = new Date().getTime() / 1000;
-				var checkUrl = "https://jkanime.net/gsplay/api.php";
+				video: {
+					url: urlv,//'play.mp4',//data.file,
+					type: 'video/mp4'
+				},
+				highlight: [{text: 'intro',time: 90,}, {text: 'Medio',time: 900,}]
+			});
+
+			dp.on('fullscreen', function() {
+				if (/Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+					screen.orientation.lock('landscape');
+				}
+			});
+						
+			function addplaybutton() {
+				document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg class="splay" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 16 32"><path d="M15.552 15.168q0.448 0.32 0.448 0.832 0 0.448-0.448 0.768l-13.696 8.512q-0.768 0.512-1.312 0.192t-0.544-1.28v-16.448q0-0.96 0.544-1.28t1.312 0.192z"></path></svg>';
+				document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon cplay";
+			}
+
+			addplaybutton();
+			dp.on('play', function() {
+				document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
+			});
+			dp.on('playing', function() {
+				document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
+			});
+			dp.on('pause', function() {
+				addplaybutton();
+					//document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon cplay";
+				//document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 17 32"><path d="M14.080 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048zM2.88 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048z"></path></svg>';
+			});
+			setTimeout(function(){
+				console.log(localStorage.videotime);
+				if(localStorage.videotime > 0){
+					dp.seek(localStorage.videotime);
+					dp.play()
+				}
+			},1500);
+			/*
+				var result = confirm("Reproducirlo");
+				if (result == true) {
+					dp.toggle();
+					dp.play();
+				}
+			*/
+			//dp.toggle();
+		}
+		function request(num) {
+			lastRequest = new Date().getTime() / 1000;
+			var checkUrl = "https://jkanime.net/gsplay/api.php";
                 if (!checkUrl) return;
 
                 $.post(checkUrl, { v: dataHash }, function (data) {
@@ -121,73 +183,18 @@
                         }, data.sleep);
                         else $("#message").text('No se pudo obtener video.');
                     } else if (typeof data.file !== 'undefined') {
-                        $("#hlsload").remove();
-						dp = new DPlayer({
-							container: document.getElementById('mse'),
-							preload: 'none', // metadata auto none
-							screenshot: false,
-							airplay: false,
-							theme: '#FADFA3',
-							hotkey: true,
-							autoplay: true,
-
-							video: {
-								url: 'play2.mp4',//'play.mp4',//data.file,
-								type: 'video/mp4'
-							},
-							highlight: [
-							{
-								text: 'intro',
-								time: 90,
-							},
-							{
-								text: 'half',
-								time: 900,
-							}
-							]
-						});
-
-						dp.on('fullscreen', function() {
-							if (/Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-								screen.orientation.lock('landscape');
-							}
-						});
-						
-						function addplaybutton() {
-							document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg class="splay" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 16 32"><path d="M15.552 15.168q0.448 0.32 0.448 0.832 0 0.448-0.448 0.768l-13.696 8.512q-0.768 0.512-1.312 0.192t-0.544-1.28v-16.448q0-0.96 0.544-1.28t1.312 0.192z"></path></svg>';
-							document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon cplay";
-						}
-
-						addplaybutton();
-						dp.on('play', function() {
-							document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
-						});
-						dp.on('playing', function() {
-							document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
-						});
-						dp.on('pause', function() {
-							addplaybutton();
-
-							//document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon cplay";
-							//document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 17 32"><path d="M14.080 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048zM2.88 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048z"></path></svg>';
-						});
-						/*
-						setTimeout(function(){
-							var result = confirm("Reproducirlo");
-							if (result == true) {
-								dp.toggle();
-								dp.play();
-							}
-						},500);
-						*/
-						//dp.toggle();
+						setPlayer(data.file);
                     } else {
                         $("#message").text('Ha ocurrido un error: ' + data.error);
                     }
                 }, "json").fail(function () {
-                    $("#message").text('Ha ocurrido un error, el servidor no respondio correctamente');
-                });
-            }
+					$("#message").text('Ha ocurrido un error, el servidor no respondio correctamente');
+			});
+		}			
+			
+       function boot () {
+
+
 
             function resizeVideo() {
                 jwplayer().resize($(window).width(), $(window).height());
@@ -208,12 +215,17 @@
             }
 
             init();
-			window.canabort = function() {
-							alert("Parece q ocurrio un error");
-							request(0);
-						};
+        }
+		function reload(){
+			localStorage.videotime = Math.floor(dp.video.currentTime);
+			console.log(localStorage.videotime);
+			request(0);
+		}
 
-        });
+		$(document).ready(function () {
+			boot();
+		});
+
 		onbeforeunload = function(e){
 			//alert("cerrando");
 		}
@@ -221,5 +233,6 @@
 		alert(e);
 	}
     </script>
+	<button style="index-z:9999" onclick="reload();">Recargar token</button>
 </body>
 </html>
