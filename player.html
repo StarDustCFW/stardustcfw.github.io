@@ -93,6 +93,7 @@
 <div id='hlsload'><p><b class="i" id="message">Obteniendo servidores</b></p></div>
 <div id="mse"></div>
 <script type="text/javascript">
+	try{
         $(document).ready(function () {
             var lastRequest = 0;
             var startTime = 0;
@@ -158,7 +159,9 @@
 						}
 
 						addplaybutton();
-						
+						dp.on('error', function() {
+							request(0);
+						});
 						dp.on('play', function() {
 							document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
 						});
@@ -210,8 +213,11 @@
             init();
         });
 		onbeforeunload = function(e){
-			alert("cerrando");
+			//alert("cerrando");
 		}
+	} catch(e){
+		alert(e);
+	}
     </script>
 </body>
 </html>
