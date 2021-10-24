@@ -90,10 +90,10 @@
 	
 	*/
     </script>
-	<div style="position: fixed;z-index:99999999999; bottom: -10">
+	<div style="position: absolute; z-index:99999999999;">
 		<button onclick="setTimeout(function(){dp.play();},1000);">Play</button>
 		<button onclick="reload();">Recargar</button>
-		<button id="Marker" onclick="dp.play(LS[vidid]);"></button>
+		<button id="Marker" onclick="setTimeout(function(){dp.play();},1000);dp.seek(LS[vidid]);"></button>
 	</div>
 			
 
@@ -164,7 +164,7 @@
 					var seconds = LS[vidid] - minutes * 60;
 					Marker.innerHTML="Resume: "+minutes+":"+seconds;					
 				}
-			}, 3000);
+			}, 1000);
 			/*
 				var result = confirm("Reproducirlo");
 				if (result == true) {
