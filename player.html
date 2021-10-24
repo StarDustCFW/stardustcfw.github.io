@@ -81,6 +81,7 @@
 -->
 
     <script type="text/javascript">
+		var dp;
         window.onload = function() {
             document.getElementById('mse').style.height = window.innerHeight + 'px';
         }
@@ -89,10 +90,10 @@
 	
 	*/
     </script>
-	<div style="position: Absolute;z-index:99999999999">
+	<div style="position: fixed;z-index:99999999999; bottom: -10">
 		<button onclick="setTimeout(function(){dp.play();},1000);">Play</button>
 		<button onclick="reload();">Recargar</button>
-		<button id="Marker" onclick="setTimeout(function(){dp.seek(LS[vidid]);},1000);"></button>
+		<button id="Marker" onclick="dp.seek(LS[vidid]);dp.play();"></button>
 	</div>
 			
 
@@ -106,7 +107,6 @@
 		var dataHash;
 		var limitRequest = 3;
 		var resizer;
-		var dp;
 		var videourl;
 		var vidid;
 		var LS = localStorage;
@@ -182,7 +182,7 @@
                 $.post(checkUrl, { v: dataHash }, function (data) {
 
                     if (data.status == 401) {
-                        window.location.href = 'error.html';
+                        //window.location.href = 'error.html';
 						$("#message").text('Ha ocurrido un error: 401');
 						return ;
                     }
