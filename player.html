@@ -152,7 +152,6 @@
 				console.log(localStorage.videotime);
 				if(localStorage.videotime > 0){
 					dp.seek(localStorage.videotime);
-					dp.play()
 				}
 			},1500);
 			/*
@@ -220,6 +219,8 @@
 			localStorage.videotime = Math.floor(dp.video.currentTime);
 			console.log(localStorage.videotime);
 			request(0);
+			dp.play()
+
 		}
 
 		$(document).ready(function () {
