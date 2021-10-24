@@ -93,7 +93,7 @@
 	<div style="position: absolute; z-index:99999999999;">
 		<button onclick="setTimeout(function(){dp.play();},1000);">Play</button>
 		<button onclick="reload();">Recargar</button>
-		<button id="Marker" onclick="setTimeout(function(){dp.play(LS[vidid]);},1000);dp.seek(LS[vidid]);"></button>
+		<button id="Marker" onclick="setTimeout(function(){dp.play();dp.seek(LS[vidid]);},1000);dp.seek(LS[vidid]);"></button>
 	</div>
 			
 
