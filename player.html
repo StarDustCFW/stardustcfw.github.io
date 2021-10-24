@@ -93,7 +93,7 @@
 	<div style="position: fixed;z-index:99999999999; bottom: -10">
 		<button onclick="setTimeout(function(){dp.play();},1000);">Play</button>
 		<button onclick="reload();">Recargar</button>
-		<button id="Marker" onclick="setTimeout(function(){dp.seek(LS[vidid]);},1000);dp.play();"></button>
+		<button id="Marker" onclick="dp.play(LS[vidid]);"></button>
 	</div>
 			
 
