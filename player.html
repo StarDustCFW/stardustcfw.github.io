@@ -123,7 +123,7 @@
                         $("#hlsload").remove();
 						dp = new DPlayer({
 							container: document.getElementById('mse'),
-							preload: 'metadata', // metadata auto none
+							preload: 'none', // metadata auto none
 							screenshot: false,
 							airplay: false,
 							theme: '#b7daff',
@@ -133,6 +133,15 @@
 							video: {
 								url: data.file,//'play.mp4',//data.file,
 								type: 'video/mp4'
+							},
+							highlight: [
+							{
+								text: 'marker for 20s',
+								time: 20,
+							},
+							{
+								text: 'marker for 2mins',
+								time: 120,
 							}
 						});
 
