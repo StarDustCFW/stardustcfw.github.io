@@ -156,10 +156,14 @@
 						});
 						
 						setTimeout(function(){
-						confirm("Reproducirlo"){
-							dp.toggle();
-							dp.play();
-						}
+							var result = confirm("Reproducirlo");
+							if (result == true) {
+								dp.toggle();
+								dp.play();
+
+							} else {
+								doc = "Cancel was pressed.";
+							}
 						},2555);
 						//dp.toggle();
                     } else {
