@@ -136,14 +136,14 @@
 				document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg class="splay" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 16 32"><path d="M15.552 15.168q0.448 0.32 0.448 0.832 0 0.448-0.448 0.768l-13.696 8.512q-0.768 0.512-1.312 0.192t-0.544-1.28v-16.448q0-0.96 0.544-1.28t1.312 0.192z"></path></svg>';
 				document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon cplay";
 			}
+			if(LS.videotime > 0){
+				dp.seek(LS.videotime);
+				LS.videotime = 0;
+			}
 
 			addplaybutton();
 			dp.on('play', function() {
-				if(LS.videotime > 0){
-					dp.seek(LS.videotime);
-					LS.videotime = 0;
-				}
-			document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
+				document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
 			});
 			dp.on('playing', function() {
 
@@ -160,6 +160,12 @@
 					dp.play();
 				}
 
+			var x = setInterval(function() {
+				var ti = Math.floor(dp.video.currentTime);
+				if(ti!=0){
+					LS.videotime = ti;
+				}
+			}, 1000);
 			/*
 				var result = confirm("Reproducirlo");
 				if (result == true) {
@@ -239,7 +245,6 @@
 		$(document).ready(function () {
 			boot();
 		});
-
 		onbeforeunload = function(e){
 			//alert("cerrando");
 		}
