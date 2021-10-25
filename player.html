@@ -73,13 +73,13 @@
 			#hlsload b {
 			font-weight: normal;
 			}
-			button {
-			background: #000;
-			color: #ffffff;
-			font-size: 20;
-			font-size-adjust:2;
-			}
-		
+        button {
+			border-radius: 20%;
+            background:  #000;
+            color:  #fff;
+            font-size: 30px;
+			border:2px solid #fff;
+        }		
     </style>
 </head>
 <body>
@@ -96,7 +96,7 @@
 	
 	*/
     </script>
-	<div style="position: absolute; z-index:99999999999;">
+	<div style="position: absolute;  top: +20px; left: +20px; z-index:99999999999;">
 		<button id="Marker" onclick="dp.play();">Play</button>
 		<button onclick="reload();">Recargar</button>
 	</div>
@@ -159,7 +159,7 @@
 				//document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 17 32"><path d="M14.080 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048zM2.88 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048z"></path></svg>';
 			});
 			if (LS[vidid] > 10) {
-				dp.notice("Para resumir "+vidid+"debes tocar dos veces Resumir", 15000, 0.8);
+				dp.notice("Para resumir "+vidid+", debes tocar dos veces Resumir", 15000, 0.8);
 			} else {
 				dp.notice(vidid, 15000, 0.8);
 			}
