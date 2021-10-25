@@ -164,6 +164,14 @@
 				Reloadb.style.opacity=0;
 				//document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
 			}
+			
+			function notifyim(){
+				if (LS[vidid] > 10) {
+					dp.notice("Para resumir "+vidid+", debes tocar dos veces Resumir", 15000, 0.8);
+				} else {
+					dp.notice(vidid, 15000, 0.8);
+				}
+			}
 
 			addplaybutton();
 			dp.on('play', function() {
@@ -174,13 +182,9 @@
 			});
 			dp.on('pause', function() {
 				addplaybutton();
-				dp.notice(vidid, 15000, 0.8);
+				notifyim();
 			});
-			if (LS[vidid] > 10) {
-				dp.notice("Para resumir "+vidid+", debes tocar dos veces Resumir", 15000, 0.8);
-			} else {
-				dp.notice(vidid, 15000, 0.8);
-			}
+			notifyim();
 			var x = setInterval(function() {
 				var ti = Math.floor(dp.video.currentTime);
 				if(ti>59){
