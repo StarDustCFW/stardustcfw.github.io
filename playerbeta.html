@@ -154,21 +154,19 @@
 
 			var x = setInterval(function() {
 				var ti = Math.floor(dp.video.currentTime);
-				vidid = dataHash.substr(51, 16);
 				if(ti>59){
 					LS[vidid] = ti;
 					var minutes = Math.floor(ti / 60);
 					var seconds = ti - minutes * 60;
-					Marker.innerHTML=vidid+"Resumir: "+minutes+":"+seconds;
+					Marker.innerHTML="Resumir: "+minutes+":"+seconds;
 					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); dp.seek(LS[vidid])};
 				} else if (LS[vidid] > 10){
 					var minutes = Math.floor(LS[vidid] / 60);
 					var seconds = LS[vidid] - minutes * 60;
 					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); dp.seek(LS[vidid])};
-					Marker.innerHTML=vidid+" Resumir: "+minutes+":"+seconds;					
+					Marker.innerHTML=" Resumir: "+minutes+":"+seconds;					
 				} else {
-					Marker.innerHTML=vidid+" PLay";
-				
+					Marker.innerHTML=vidid+" Play";
 				}
 			}, 1000);
 			/*
@@ -202,6 +200,11 @@
                         }, data.sleep);
                         else $("#message").text('No se pudo obtener video.');
                     } else if (typeof data.file !== 'undefined') {
+					
+						let str = data.file
+						var val1 = str.lastIndexOf("/");
+						var val2 = str.search(".mp4");
+						vidid = str.substr(val1, val2 - val1);//val2 - val1);
 						if(!isplayer){
 							setPlayer(data.file);
 						} else {
@@ -236,7 +239,7 @@
                 
 				$("#message").text('Creando sistemas y consultando datos...');
                 request(0);
-				vidid = dataHash.substr(50, 16)
+				//vidid = dataHash.substr(50, 16)
 				
             }
 
