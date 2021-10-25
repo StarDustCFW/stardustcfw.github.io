@@ -88,8 +88,8 @@
 		}
 			
         button {
-			border-radius: 10%;
-            background:  #000;
+			border-radius: 8%;
+            background:  rgba(0,0,0,0.5);
             color:  #fff;
             font-size: 30px;
 			border:2px solid #fff;
@@ -109,6 +109,10 @@
             document.getElementById('mse').style.height = window.innerHeight + 'px';
 			Marker.style.top = (window.innerHeight/2)+"px";
 			Marker.style.left = (window.innerWidth/2 - Marker.clientWidth/2)+"px";
+			
+			Reloadb.style.top = (window.innerHeight - Reloadb.clientHeight*3)+"px";
+			Reloadb.style.left = (window.innerWidth - Reloadb.clientWidth - 10)+"px";
+
         }
 	
 	/*
