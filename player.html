@@ -94,8 +94,6 @@
 		<button id="Marker" onclick="dp.play();">Play</button>
 		<button onclick="reload();">Recargar</button>
 	</div>
-			
-
 <div id='hlsload'><p><b class="i" id="message">Obteniendo servidores</b></p></div>
 <div id="mse"></div>
 
@@ -108,13 +106,14 @@
 		var resizer;
 		var videourl;
 		var vidid;
+		var isplayer=false;
 		var LS = localStorage;
 		var SS = sessionStorage;
 		function setPlayer(urlv){
             $("#hlsload").remove();
 			dp = new DPlayer({
 				container: document.getElementById('mse'),
-				preload: 'metadata', // metadata auto none
+				preload: 'none', // metadata auto none
 				screenshot: false,
 				airplay: false,
 				theme: '#FADFA3',
@@ -123,10 +122,9 @@
 
 				video: {
 					url: urlv,//'play.mp4',//data.file,
-					type: 'video/mp4',
-					thumbnails: 'Icon.jpg'
+					type: 'video/mp4'
 				},
-				highlight: [{text: 'intro',time: 90,}, {text: 'Medio',time: 900,}]
+				highlight: [{text: 'intro',time: 90,}, {text: 'Medio',time: 1000,}]
 			});
 
 			dp.on('fullscreen', function() {
@@ -150,23 +148,26 @@
 			});
 			dp.on('pause', function() {
 				addplaybutton();
+				dp.notice(vidid, 15000, 0.8);
 					//document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon cplay";
 				//document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 17 32"><path d="M14.080 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048zM2.88 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048z"></path></svg>';
 			});
-
+			dp.notice(vidid, 15000, 0.8);
 			var x = setInterval(function() {
 				var ti = Math.floor(dp.video.currentTime);
 				if(ti>59){
 					LS[vidid] = ti;
 					var minutes = Math.floor(ti / 60);
 					var seconds = ti - minutes * 60;
-					Marker.innerHTML="Resume: "+minutes+":"+seconds;
-					Marker.onclick=function(){setTimeout(function(){dp.play();},1000);setTimeout(function(){dp.seek(LS[vidid]);},1500); dp.seek(LS[vidid])};
+					Marker.innerHTML="Resumir: "+minutes+":"+seconds;
+					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); dp.seek(LS[vidid])};
 				} else if (LS[vidid] > 10){
 					var minutes = Math.floor(LS[vidid] / 60);
 					var seconds = LS[vidid] - minutes * 60;
-					Marker.onclick=function(){setTimeout(function(){dp.play();},1000);setTimeout(function(){dp.seek(LS[vidid]);},1500); dp.seek(LS[vidid])};
-					Marker.innerHTML="Resume: "+minutes+":"+seconds;					
+					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); dp.seek(LS[vidid])};
+					Marker.innerHTML=" Resumir: "+minutes+":"+seconds;					
+				} else {
+					//Marker.innerHTML=vidid+" Play";
 				}
 			}, 1000);
 			/*
@@ -177,6 +178,7 @@
 				}
 			*/
 			//dp.toggle();
+			isplayer=true;
 		}
 		function request(num) {
 			lastRequest = new Date().getTime() / 1000;
@@ -199,7 +201,17 @@
                         }, data.sleep);
                         else $("#message").text('No se pudo obtener video.');
                     } else if (typeof data.file !== 'undefined') {
-						setPlayer(data.file);
+					
+						let str = data.file
+						var val1 = str.lastIndexOf("/");
+						var val2 = str.search(".mp4");
+						vidid = str.substr(val1, val2 - val1);//val2 - val1);
+						if(!isplayer){
+							setPlayer(data.file);
+						} else {
+							dp.switchVideo({url: data.file,type: 'video/mp4'});
+						}
+						return data.file;
                     } else {
                         $("#message").text('Ha ocurrido un error: ' + data.error);
                     }
@@ -210,6 +222,7 @@
 			
        function boot () {
 
+			//dp.switchVideo({url: data.file,type: 'video/mp4'});
 
 
             function resizeVideo() {
@@ -224,16 +237,17 @@
 
                 var file = window.location.hash.split('#')[1];
 				dataHash = file;
-				vidid = dataHash.substr(0, 16)
                 
 				$("#message").text('Creando sistemas y consultando datos...');
                 request(0);
+				//vidid = dataHash.substr(50, 16)
 				
             }
 
             init();
         }
 		function reload(){
+			request(0);
 			/*
 			var ti = Math.floor(dp.video.currentTime);
 			if(ti!=0){
@@ -242,8 +256,8 @@
 			
 			console.log(LS[vidid]);
 			request(0);
-			*/
-			window.location.reload(true);
+				window.location.reload(true);
+		*/
 			
 
 		}
