@@ -96,15 +96,7 @@
 	</div>
 <div id='hlsload'><p><b class="i" id="message">Obteniendo servidores</b></p></div>
 <div id="mse"></div>
-			
 
-<video id="player" playsinline controls data-poster="Icon.jpg">
-  <source src="play.mp4" type="video/mp4" />
-  <source src="/path/to/video.webm" type="video/webm" />
-
-  <!-- Captions are optional -->
-  <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default />
-</video>
 <script type="text/javascript">
 	try{
 		var lastRequest = 0;
@@ -121,7 +113,7 @@
             $("#hlsload").remove();
 			dp = new DPlayer({
 				container: document.getElementById('mse'),
-				preload: 'metadata', // metadata auto none
+				preload: 'none', // metadata auto none
 				screenshot: false,
 				airplay: false,
 				theme: '#FADFA3',
@@ -130,8 +122,7 @@
 
 				video: {
 					url: urlv,//'play.mp4',//data.file,
-					type: 'video/mp4',
-					thumbnails: 'Icon.jpg'
+					type: 'video/mp4'
 				},
 				highlight: [{text: 'intro',time: 90,}, {text: 'Medio',time: 900,}]
 			});
@@ -168,11 +159,11 @@
 					var minutes = Math.floor(ti / 60);
 					var seconds = ti - minutes * 60;
 					Marker.innerHTML="Resumir: "+minutes+":"+seconds;
-					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); setTimeout(function(){dp.seek(LS[vidid]);},1500); dp.seek(LS[vidid])};
+					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); dp.seek(LS[vidid])};
 				} else if (LS[vidid] > 10){
 					var minutes = Math.floor(LS[vidid] / 60);
 					var seconds = LS[vidid] - minutes * 60;
-					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); setTimeout(function(){dp.seek(LS[vidid]);},1500); dp.seek(LS[vidid])};
+					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); dp.seek(LS[vidid])};
 					Marker.innerHTML="Resumir: "+minutes+":"+seconds;					
 				}
 			}, 1000);
@@ -238,7 +229,7 @@
 
                 var file = window.location.hash.split('#')[1];
 				dataHash = file;
-				vidid = dataHash.substr(0, 16)
+				vidid = dataHash.substr(50, 32)
                 
 				$("#message").text('Creando sistemas y consultando datos...');
                 request(0);
