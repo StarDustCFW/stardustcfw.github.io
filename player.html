@@ -281,7 +281,10 @@
             init();
         }
 		function reload(){
-			request(0);
+			if(confirm("Recargar Video?")){
+				request(0);
+			}
+			
 			/*
 			var ti = Math.floor(dp.video.currentTime);
 			if(ti!=0){
