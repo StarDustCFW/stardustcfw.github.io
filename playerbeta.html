@@ -154,6 +154,7 @@
 
 			var x = setInterval(function() {
 				var ti = Math.floor(dp.video.currentTime);
+				vidid = dataHash.substr(50, 16);
 				if(ti>59){
 					LS[vidid] = ti;
 					var minutes = Math.floor(ti / 60);
@@ -229,10 +230,10 @@
 
                 var file = window.location.hash.split('#')[1];
 				dataHash = file;
-				vidid = dataHash.substr(50, 32)
                 
 				$("#message").text('Creando sistemas y consultando datos...');
                 request(0);
+				vidid = dataHash.substr(50, 16)
 				
             }
 
