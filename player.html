@@ -74,6 +74,7 @@
 			font-weight: normal;
 			}
 		.button-reload {
+			opacity: 0;
 			position: absolute;
 			z-index:99999999999;
 
@@ -156,11 +157,17 @@
 						
 			function addplaybutton() {
 				Marker.style.opacity=1;
+				setTimeout(function(){
+					Reloadb.style.opacity=1;
+				},2000)
+				
+
 				//document.querySelector(".dplayer-bezel-icon").innerHTML = '<svg class="splay" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 16 32"><path d="M15.552 15.168q0.448 0.32 0.448 0.832 0 0.448-0.448 0.768l-13.696 8.512q-0.768 0.512-1.312 0.192t-0.544-1.28v-16.448q0-0.96 0.544-1.28t1.312 0.192z"></path></svg>';
 				//document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon cplay";
 			}
 			function remplaybutton(){
 				Marker.style.opacity=0;
+				Reloadb.style.opacity=0;
 				//document.querySelector(".dplayer-bezel-icon").className = "dplayer-bezel-icon";
 			}
 
