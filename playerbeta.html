@@ -159,13 +159,16 @@
 					LS[vidid] = ti;
 					var minutes = Math.floor(ti / 60);
 					var seconds = ti - minutes * 60;
-					Marker.innerHTML="Resumir: "+minutes+":"+seconds;
+					Marker.innerHTML=vidid+"Resumir: "+minutes+":"+seconds;
 					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); dp.seek(LS[vidid])};
 				} else if (LS[vidid] > 10){
 					var minutes = Math.floor(LS[vidid] / 60);
 					var seconds = LS[vidid] - minutes * 60;
 					Marker.onclick=function(){setTimeout(function(){dp.play();},1000); dp.seek(LS[vidid])};
-					Marker.innerHTML="Resumir: "+minutes+":"+seconds;					
+					Marker.innerHTML=vidid+" Resumir: "+minutes+":"+seconds;					
+				} else {
+					Marker.innerHTML=vidid+" PLay";
+				
 				}
 			}, 1000);
 			/*
