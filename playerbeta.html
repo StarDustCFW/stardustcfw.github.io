@@ -209,11 +209,8 @@
                     } else if (typeof data.file !== 'undefined') {
 						if(!isplayer){
 							setPlayer(data.file);
-							dp.switchVideo({url: data.file,type: 'video/mp4'});
-
 						} else {
 							dp.switchVideo({url: data.file,type: 'video/mp4'});
-							dp.play();
 						}
 						return data.file;
                     } else {
