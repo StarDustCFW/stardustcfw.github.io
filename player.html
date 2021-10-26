@@ -255,10 +255,6 @@
 		}			
 			
        function boot () {
-
-			//dp.switchVideo({url: data.file,type: 'video/mp4'});
-
-
             function resizeVideo() {
                 jwplayer().resize($(window).width(), $(window).height());
             }
@@ -281,9 +277,7 @@
             init();
         }
 		function reload(){
-			if(confirm("Recargar Video?")){
-				request(0);
-			}
+			request(0);
 			
 			/*
 			var ti = Math.floor(dp.video.currentTime);
