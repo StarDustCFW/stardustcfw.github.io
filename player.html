@@ -19,7 +19,7 @@
 </head>
 <body>
     <iframe width="100%" height="100%" frameBorder="0" id="mse"></iframe>
-    <video width="540" height="310" controls>
+    <video width="100%" height="100%"controls>
       <source id="vidf" src="" type="video/mp4">
     </video>
 
@@ -37,8 +37,12 @@
     var file = window.location.hash.split('#')[1];
     file = hex2a(file); // returns '2460'
 	console.log(file);
-    mse.src=file
-    vidf.src=file
+    if (file.includes(".mp4")){
+        vidf.src=file
+        mse.remove();
+    }else {
+        mse.src=file
+    }
 
 </script>
 
