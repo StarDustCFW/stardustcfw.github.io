@@ -20,6 +20,7 @@
 <body>
     <iframe width="100%" height="100%" frameBorder="0" id="mse"></iframe>
     <video id="vidt" width="100%" height="100%"controls>
+      <img id="vidi" src="Icon.jpg">
       <source id="vidf" src="" type="video/mp4">
     </video>
 
@@ -27,20 +28,21 @@
     //https://www.mp4upload.com/embed-pwwuv53wq83s.html
     //68747470733A2F2F7777772E6D703475706C6F61642E636F6D2F656D6265642D7077777576353377713833732E68746D6C
     function getThumbnailUrl(videoUrl) {
-        // Usa una expresión regular para extraer la parte del video URL
-        const videoIdMatch = videoUrl.match(/\/v2\/([^\/]+)\.mp4/);
+        // Usa una expresión regular para extraer el dominio y el ID del video
+        const urlMatch = videoUrl.match(/^(https:\/\/[^\/]+)\/v2\/([^\/]+)\.mp4/);
 
-        if (videoIdMatch && videoIdMatch[1]) {
-            // Extrae el ID del video
-            const videoId = videoIdMatch[1];
+        if (urlMatch && urlMatch[1] && urlMatch[2]) {
+            // Extrae el dominio y el ID del video
+            const baseUrl = urlMatch[1];
+            const videoId = urlMatch[2];
             
-            // Construye la URL de la miniatura
-            const thumbnailUrl = `https://s-delivery38.mxcontent.net/thumbs/${videoId}.jpg`;
+            // Construye la URL de la miniatura usando el dominio extraído
+            const thumbnailUrl = `${baseUrl}/thumbs/${videoId}.jpg`;
             
             return thumbnailUrl;
         } else {
             // Si no se puede extraer el ID del video, devuelve un mensaje de error
-            throw new Error('No se pudo extraer el ID del video.');
+            throw new Error('No se pudo extraer el dominio o el ID del video.');
         }
     }
     function hex2a(hexx) {
@@ -56,6 +58,7 @@
     if (file.includes(".mp4")){
         vidf.src=file
         vidt.poster = getThumbnailUrl(file)
+        vidi.src = vidt.poster;
         mse.remove();
     }else {
         mse.src=file
