@@ -55,11 +55,13 @@
     var file = window.location.hash.split('#')[1];
     file = hex2a(file); // returns '2460'
 	console.log(file);
-    if (file.includes(".mp4")){
+    mse.src=file
+    if (file.endsWith(".mp4")){
         vidf.src=file
         vidt.poster = getThumbnailUrl(file)
         vidi.src = vidt.poster;
         mse.remove();
+
     }else {
         mse.src=file
     }
