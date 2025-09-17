@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<meta http-equiv="refresh" content="0; url=https://jkanime.net/404.shtml" />
 <html>
 <body>
 
@@ -9,10 +8,20 @@
 <p id="demo"></p>
 
 <script>
-let agent = navigator.userAgent;
-document.getElementById("demo").innerHTML = "User-agent:<br>" + agent;
-agent = encodeURIComponent("\""+agent+"\"");
-document.cookie = "UA="+agent+"; expires=Thu, 18 Dec 2050 12:00:00 UTC; path=/"; 
+    let agent = navigator.userAgent;
+    document.getElementById("demo").innerHTML = "User-agent:<br>" + agent;
+    agent = encodeURIComponent("\""+agent+"\"");
+    document.cookie = "UA="+agent+"; expires=Thu, 18 Dec 2050 12:00:00 UTC; path=/"; 
+
+    const params = new URLSearchParams(window.location.search);
+
+    // ¿Ya está el parámetro "exit"?
+    if (!params.has('exit')) {
+        // Añade ?exit y recarga
+        window.location.href = '?exit';
+    }
+    // Si ya tiene ?exit, simplemente no hacemos nada
+
 </script>
 
 </body>
